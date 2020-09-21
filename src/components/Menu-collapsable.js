@@ -3,28 +3,34 @@ import styled from "styled-components";
 
 //---------------------------------------------------------------------------------
 const StyledButton = styled.button`
+    width: ${(props) => props.tabWidth};
+    display: block;
     cursor: pointer;
     color: white;
-    background-color: #505050;
+    background-color: ${(props) => props.backgroundColor};
     background-image: ${(props) => props.top};
     border: 0;
     text-align: left;
     padding: 0px;
     margin: 0px;
     border: 0px solid;
-    width: 100%;
     /* height: 60px; */
-    min-height:48px;
+    min-height: 48px;
     font-size: 15px;
     outline: none;
     border-radius: 0;
+    &:hover{
+        filter: brightness(50%);
+    }
     & img {
+        width: ${(props) => props.tabWidth};
         display: block;
-        margin: 0;
-        padding: 10px;
+        margin: 0px;
+        padding: 0px;
     }
 `;
 const StyledContent = styled.div`
+    width: ${(props) => props.tabWidth};
     margin: 0px;
     padding: 0px;
     display: block;
@@ -41,7 +47,14 @@ const StyledContent = styled.div`
     }
 `;
 //---------------------------------------------------------------------------------
-const MenuCollapsable = ({ startValue = false, children = "null\n", top = "nullTop", bottom = "nullBottom" }) => {
+const MenuCollapsable = ({
+    startValue = false,
+    children = "null\n",
+    top = "nullTop",
+    bottom = "nullBottom",
+    tabWidth = "100%",
+    backgroundColor = "#505050",
+}) => {
     const [getToggle, setToggle] = useState(startValue);
     const [getActiveStyle, setActiveStyle] = useState("");
     const [getScrollHeight, setScrollHeight] = useState(0);
@@ -50,11 +63,9 @@ const MenuCollapsable = ({ startValue = false, children = "null\n", top = "nullT
     useEffect(() => {
         setActiveStyle(getToggle ? "active" : "");
         setScrollHeight(contentRef.current.scrollHeight);
-
     }, [getToggle]);
 
-    useLayoutEffect(() => {
-    }, [getToggle]);
+    useLayoutEffect(() => {}, [getToggle]);
     //-------------------------------
     const clickFunc = () => {
         setToggle(!getToggle);
@@ -63,23 +74,28 @@ const MenuCollapsable = ({ startValue = false, children = "null\n", top = "nullT
     //-------------------------------
     return (
         <div>
-            <StyledButton onClick={() => clickFunc()}>
+            <StyledButton
+                backgroundColor={backgroundColor}
+                tabWidth={tabWidth}
+                onClick={() => clickFunc()}
+            >
                 <img src={top} alt={top}></img>
             </StyledButton>
+
             <StyledContent
                 className={getActiveStyle}
                 isActive={getToggle}
                 scrollHeight={getScrollHeight}
                 ref={contentRef}
+                tabWidth={tabWidth}
             >
-                <p>
                 {children}
-                {getToggle.toString()}
-                {"\n"}
-                {getActiveStyle}
-                </p>
             </StyledContent>
-            <StyledButton onClick={() => clickFunc()}>
+            <StyledButton
+                backgroundColor={backgroundColor}
+                tabWidth={tabWidth}
+                onClick={() => clickFunc()}
+            >
                 <img src={bottom} alt={bottom}></img>
             </StyledButton>
         </div>
