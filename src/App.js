@@ -1,20 +1,18 @@
 import React from "react";
 import "./App.scss";
-import MenuCollapsable from "./components/Menu-collapsable";
-import imageTop from './assets/top.png';
-import imageBottom from './assets/bot.png';
+import MenuCollapsable from "./components/Menu-collapsible";
 
 function App() {
     return (
         <div className="App">
             <MenuCollapsable
                 startValue={true}
-                top={imageTop}
-                bottom={imageBottom}
+                top={"top"}
+                bottom={"bottom"}
                 tabWidth={"400px"}
-                backgroundColor={"none"}
             >
                 <p>
+                    <h1>Children</h1>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Phasellus pretium lorem ac nisl bibendum eleifend. Morbi
                     felis sapien, dapibus ac ornare non, auctor vitae augue.
@@ -47,8 +45,7 @@ function App() {
                     ante. Pellentesque id ex vehicula, lobortis dolor in, varius
                     odio. Pellentesque suscipit congue velit non porttitor.
                 </p>
-            </MenuCollapsable>
-            <MenuCollapsable> Domyślne wartości</MenuCollapsable>
+                </MenuCollapsable>
         </div>
     );
 }

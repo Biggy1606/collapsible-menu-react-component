@@ -8,7 +8,6 @@ const StyledButton = styled.button`
     cursor: pointer;
     color: white;
     background-color: ${(props) => props.backgroundColor};
-    background-image: ${(props) => props.top};
     border: 0;
     text-align: left;
     padding: 0px;
@@ -19,8 +18,8 @@ const StyledButton = styled.button`
     font-size: 15px;
     outline: none;
     border-radius: 0;
-    &:hover{
-        filter: brightness(50%);
+    &:hover {
+        background-color: #101010;
     }
     & img {
         width: ${(props) => props.tabWidth};
@@ -47,13 +46,13 @@ const StyledContent = styled.div`
     }
 `;
 //---------------------------------------------------------------------------------
-const MenuCollapsable = ({
+const MenuCollapsible = ({
     startValue = false,
-    children = "null\n",
-    top = "nullTop",
-    bottom = "nullBottom",
     tabWidth = "100%",
     backgroundColor = "#505050",
+    top = '',
+    bottom = '',
+    children = '',
 }) => {
     const [getToggle, setToggle] = useState(startValue);
     const [getActiveStyle, setActiveStyle] = useState("");
@@ -79,9 +78,8 @@ const MenuCollapsable = ({
                 tabWidth={tabWidth}
                 onClick={() => clickFunc()}
             >
-                <img src={top} alt={top}></img>
+                {top}
             </StyledButton>
-
             <StyledContent
                 className={getActiveStyle}
                 isActive={getToggle}
@@ -96,9 +94,9 @@ const MenuCollapsable = ({
                 tabWidth={tabWidth}
                 onClick={() => clickFunc()}
             >
-                <img src={bottom} alt={bottom}></img>
+                {bottom}
             </StyledButton>
         </div>
     );
 };
-export default MenuCollapsable;
+export default MenuCollapsible;
